@@ -57,21 +57,20 @@
         </ul>
     </div>
 
-    <!-- 🔊 Sonido de ambiente (suspenso) -->
+    <!-- 🔊 Sonido de ambiente (local) -->
     <audio id="terror-audio" loop>
-        <source src="https://www.fesliyanstudios.com/play-mp3/358" type="audio/mpeg">
+        <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg">
         Tu navegador no soporta el audio.
     </audio>
 
     <script>
-        function iniciarExperiencia() {
+        document.addEventListener('click', () => {
             const audio = document.getElementById("terror-audio");
-            const contenido = document.getElementById("contenido");
+            audio.volume = 0.4; // volumen suave
             audio.play().catch(err => {
-                console.log("Autoplay bloqueado:", err);
+                console.log("Error al reproducir audio:", err);
             });
-            contenido.classList.remove("oculto");
-        }
+        }, { once: true }); // solo una vez al hacer clic
     </script>
 </body>
 </html>
