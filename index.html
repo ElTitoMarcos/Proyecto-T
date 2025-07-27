@@ -5,6 +5,18 @@
     <title>Juegos de Terror</title>
     <link rel="stylesheet" href="/terror-juego/css/styles.css">
     <style>
+        body {
+            background-color: #000;
+            background-image: url('https://www.mubis.es/media/users/2558/118680/the-nightmare-la-pelicula-mas-terrorifica-del-ano-es-un-documental-original.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #e0e0e0;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            padding: 50px;
+        }
+
         .info {
             margin-top: 30px;
             font-size: 1.2em;
@@ -16,7 +28,7 @@
         }
 
         audio {
-            display: none; /* Ocultar el reproductor */
+            display: none;
         }
 
         .boton-inicio {
@@ -41,19 +53,17 @@
     </style>
 </head>
 <body>
-    <h1 class="glow">Bienvenido a mi web de juegos de terror</h1>
-    <p class="info">🕰️ Hora: 20:30</p>
-    <p class="info">📍 Lugar: Calle Eucaliptus, número 49</p>
-    <p><strong>Presiona el botón para comenzar...</strong></p>
+    <h1 class="glow">No presiones el botón.</h1>
 
-    <button class="boton-inicio" onclick="iniciarExperiencia()">Iniciar experiencia</button>
+    <button class="boton-inicio" onclick="iniciarExperiencia()">Continuar</button>
 
     <div id="contenido" class="oculto">
+        <p class="info">🕰️ Hora: 20:30</p>
+        <p class="info">📍 Lugar: Calle Eucaliptus, número 49</p>
         <p>Haz clic en un jugador para comenzar...</p>
         <ul>
             <li><a href="jugador1.html">Jugador 1</a></li>
             <li><a href="jugador2.html">Jugador 2</a></li>
-            <!-- Agrega más enlaces si quieres -->
         </ul>
     </div>
 
@@ -64,13 +74,13 @@
     </audio>
 
     <script>
-        document.addEventListener('click', () => {
+        function iniciarExperiencia() {
             const audio = document.getElementById("terror-audio");
-            audio.volume = 0.4; // volumen suave
-            audio.play().catch(err => {
-                console.log("Error al reproducir audio:", err);
-            });
-        }, { once: true }); // solo una vez al hacer clic
+            audio.volume = 0.4;
+            audio.play().catch(err => console.log("Error al reproducir audio:", err));
+
+            document.getElementById("contenido").classList.remove("oculto");
+        }
     </script>
 </body>
 </html>
