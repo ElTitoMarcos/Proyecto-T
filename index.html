@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Juegos de Terror</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- importante para móviles -->
     <link rel="stylesheet" href="/terror-juego/css/styles.css">
     <style>
         body {
+            margin: 0;
+            padding: 0;
             background-color: #000;
-            background-image: url('https://www.mubis.es/media/users/2558/118680/the-nightmare-la-pelicula-mas-terrorifica-del-ano-es-un-documental-original.jpg');
+            background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             color: #e0e0e0;
             font-family: 'Georgia', serif;
             text-align: center;
-            padding: 50px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px 20px;
         }
 
-        .info {
-            margin-top: 30px;
-            font-size: 1.2em;
-            color: #ff4444;
-        }
-
-        .glow {
+        h1.glow {
+            font-size: 1.8em;
             text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px crimson;
-        }
-
-        audio {
-            display: none;
+            margin-bottom: 30px;
         }
 
         .boton-inicio {
@@ -36,10 +35,10 @@
             color: white;
             border: none;
             padding: 15px 30px;
-            font-size: 1.2em;
+            font-size: 1.1em;
             border-radius: 10px;
             cursor: pointer;
-            margin: 30px auto;
+            margin: 20px auto;
             box-shadow: 0 0 10px crimson;
         }
 
@@ -48,6 +47,30 @@
         }
 
         .oculto {
+            display: none;
+        }
+
+        .info {
+            font-size: 1em;
+            color: #ff4444;
+            margin: 10px 0;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        li a {
+            color: crimson;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        audio {
             display: none;
         }
     </style>
@@ -78,7 +101,6 @@
             const audio = document.getElementById("terror-audio");
             audio.volume = 0.4;
             audio.play().catch(err => console.log("Error al reproducir audio:", err));
-
             document.getElementById("contenido").classList.remove("oculto");
         }
     </script>
