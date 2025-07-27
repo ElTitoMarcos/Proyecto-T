@@ -29,11 +29,11 @@
       color: white;
       border: none;
       padding: 15px 30px;
-      font-size: 1.4em;
+      font-size: 1.8em;
       border-radius: 12px;
       cursor: pointer;
       box-shadow: 0 0 15px crimson;
-      margin-top: 20px;
+      margin: 10px;
       transition: background-color 0.3s;
     }
 
@@ -44,47 +44,52 @@
     #botonTerror {
       display: none;
       z-index: 10;
+      font-size: 1.4em;
+      padding: 15px 30px;
     }
 
-    #botonPlay {
+    #botonPlay, #botonRepetir, #botonContinuar {
       display: none;
       font-size: 2em;
       padding: 10px 20px;
       user-select: none;
     }
 
-    #mensajeFinal {
-      margin-top: 30px;
-      font-size: 1.3em;
-      color: #ff4444;
-      text-shadow: 0 0 10px darkred;
+    #contenedorFinal {
       display: none;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
   <button id="botonTerror">NO LO HAGAS</button>
-  <button id="botonPlay">▶️ Reproducir pista</button>
+  <button id="botonPlay">▶️</button>
+
+  <div id="contenedorFinal">
+    <button id="botonRepetir">▶️</button>
+    <button id="botonContinuar">Continuar</button>
+  </div>
 
   <audio id="audioAmbiente" loop>
     <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
   </audio>
 
-  <audio id="audioPista" >
+  <audio id="audioPista">
     <source src="/terror-juego/audio/pista-1.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
   </audio>
 
-  <div id="mensajeFinal">Fin de la pista. Puedes continuar...</div>
-
   <script>
     const boton = document.getElementById("botonTerror");
     const botonPlay = document.getElementById("botonPlay");
+    const botonRepetir = document.getElementById("botonRepetir");
+    const botonContinuar = document.getElementById("botonContinuar");
+    const contenedorFinal = document.getElementById("contenedorFinal");
+
     const audioAmbiente = document.getElementById("audioAmbiente");
     const audioPista = document.getElementById("audioPista");
-    const mensajeFinal = document.getElementById("mensajeFinal");
 
     let etapa = 0;
 
@@ -107,7 +112,6 @@
         boton.textContent = "AHORA YA ES TARDE";
         etapa = 3;
       } else if (etapa === 3) {
-        // Oculta boton terror, muestra boton play y pausa audio ambiente
         boton.style.display = "none";
         botonPlay.style.display = "inline-block";
         audioAmbiente.pause();
@@ -115,22 +119,35 @@
       }
     });
 
-    // Control botón play/pause para pista-1
+    // Control botón play para pista-1
     botonPlay.addEventListener("click", () => {
       if (audioPista.paused) {
         audioPista.play();
-        botonPlay.textContent = "⏸️ Pausar pista";
-        mensajeFinal.style.display = "none";
+        botonPlay.textContent = "⏸️";
       } else {
         audioPista.pause();
-        botonPlay.textContent = "▶️ Reproducir pista";
+        botonPlay.textContent = "▶️";
       }
     });
 
-    // Cuando la pista acaba, ocultar botón play y mostrar mensaje final
+    // Cuando la pista acaba, ocultar botón play y mostrar opciones
     audioPista.addEventListener("ended", () => {
       botonPlay.style.display = "none";
-      mensajeFinal.style.display = "block";
+      contenedorFinal.style.display = "block";
+    });
+
+    // Repetir pista
+    botonRepetir.addEventListener("click", () => {
+      audioPista.currentTime = 0;
+      audioPista.play();
+      botonPlay.textContent = "⏸️";
+      contenedorFinal.style.display = "none";
+      botonPlay.style.display = "inline-block";
+    });
+
+    // Continuar (redirigir a index)
+    botonContinuar.addEventListener("click", () => {
+      window.location.href = "/terror-juego/index.html";
     });
   </script>
 
