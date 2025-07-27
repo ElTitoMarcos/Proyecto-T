@@ -46,14 +46,21 @@
       z-index: 10;
       font-size: 1.4em;
       padding: 15px 30px;
+      box-shadow: 0 0 15px crimson; /* Mantener glow para este botón */
     }
 
-    /* Botones de reproducir sin glow */
+    /* Botones de reproducir sin glow y sin box-shadow */
     #botonPlay, #botonRepetir {
       display: none;
       font-size: 2em;
       padding: 10px 20px;
-      box-shadow: none; /* quitar glow rojo */
+      box-shadow: none !important; /* Quitar cualquier sombra */
+      background-color: crimson;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background-color 0.3s;
     }
 
     #botonPlay:hover, #botonRepetir:hover {
@@ -135,10 +142,13 @@
       }
     });
 
-    // Cuando la pista acaba, ocultar botón play y mostrar opciones
+    // Cuando la pista acaba, ocultar botón play y mostrar opciones repetir y continuar
     audioPista.addEventListener("ended", () => {
       botonPlay.style.display = "none";
       contenedorFinal.style.display = "block";
+      // Mostrar ambos botones: repetir y continuar
+      botonRepetir.style.display = "inline-block";
+      botonContinuar.style.display = "inline-block";
     });
 
     // Repetir pista
@@ -148,6 +158,9 @@
       botonPlay.textContent = "⏸️";
       contenedorFinal.style.display = "none";
       botonPlay.style.display = "inline-block";
+      // Ocultar los botones de repetir y continuar mientras suena
+      botonRepetir.style.display = "none";
+      botonContinuar.style.display = "none";
     });
 
     // Continuar (redirigir a index)
