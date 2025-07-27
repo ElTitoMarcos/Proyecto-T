@@ -49,12 +49,14 @@
       box-shadow: 0 0 15px crimson; /* Mantener glow para este botón */
     }
 
-    /* Botones de reproducir sin glow y sin box-shadow */
+    /* Botones de reproducir sin glow ni box-shadow ni outline */
     #botonPlay, #botonRepetir {
       display: none;
       font-size: 2em;
       padding: 10px 20px;
-      box-shadow: none !important; /* Quitar cualquier sombra */
+      box-shadow: none !important; /* quitar cualquier sombra */
+      outline: none !important; /* quitar borde al focus */
+      text-shadow: none !important; /* quitar sombra texto */
       background-color: crimson;
       border: none;
       color: white;
@@ -65,6 +67,9 @@
 
     #botonPlay:hover, #botonRepetir:hover {
       background-color: darkred;
+      box-shadow: none !important;
+      outline: none !important;
+      text-shadow: none !important;
     }
 
     #contenedorFinal {
