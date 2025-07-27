@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Juegos de Terror</title>
+  <title>Juegos de Terror - Jugador 1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -18,10 +18,13 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
+      flex-direction: column;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
     }
 
     button {
-      display: none;
       background-color: crimson;
       color: white;
       border: none;
@@ -30,32 +33,65 @@
       border-radius: 12px;
       cursor: pointer;
       box-shadow: 0 0 15px crimson;
-      z-index: 10;
+      margin-top: 20px;
+      transition: background-color 0.3s;
     }
 
     button:hover {
       background-color: darkred;
+    }
+
+    #botonTerror {
+      display: none;
+      z-index: 10;
+    }
+
+    #botonPlay {
+      display: none;
+      font-size: 2em;
+      padding: 10px 20px;
+      user-select: none;
+    }
+
+    #mensajeFinal {
+      margin-top: 30px;
+      font-size: 1.3em;
+      color: #ff4444;
+      text-shadow: 0 0 10px darkred;
+      display: none;
     }
   </style>
 </head>
 <body>
 
   <button id="botonTerror">NO LO HAGAS</button>
+  <button id="botonPlay">▶️ Reproducir pista</button>
 
   <audio id="audioAmbiente" loop>
     <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
   </audio>
 
+  <audio id="audioPista" >
+    <source src="/terror-juego/audio/pista-1.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <div id="mensajeFinal">Fin de la pista. Puedes continuar...</div>
+
   <script>
     const boton = document.getElementById("botonTerror");
-    const audio = document.getElementById("audioAmbiente");
+    const botonPlay = document.getElementById("botonPlay");
+    const audioAmbiente = document.getElementById("audioAmbiente");
+    const audioPista = document.getElementById("audioPista");
+    const mensajeFinal = document.getElementById("mensajeFinal");
+
     let etapa = 0;
 
     // Mostrar botón en primera interacción (clic/tap)
     document.addEventListener("click", () => {
       if (etapa === 0) {
-        boton.style.display = "block";
+        boton.style.display = "inline-block";
         etapa = 1;
       }
     }, { once: true });
@@ -65,15 +101,38 @@
       if (etapa === 1) {
         boton.textContent = "TE VAS A ARREPENTIR";
         etapa = 2;
-        audio.volume = 0.4;
-        audio.play().catch(e => console.log("Error al reproducir audio:", e));
+        audioAmbiente.volume = 0.4;
+        audioAmbiente.play().catch(e => console.log("Error al reproducir audio ambiente:", e));
       } else if (etapa === 2) {
         boton.textContent = "AHORA YA ES TARDE";
         etapa = 3;
-      } else {
-        // Aquí puedes agregar acción al tercer clic si quieres
+      } else if (etapa === 3) {
+        // Oculta boton terror, muestra boton play y pausa audio ambiente
+        boton.style.display = "none";
+        botonPlay.style.display = "inline-block";
+        audioAmbiente.pause();
+        etapa = 4;
       }
     });
+
+    // Control botón play/pause para pista-1
+    botonPlay.addEventListener("click", () => {
+      if (audioPista.paused) {
+        audioPista.play();
+        botonPlay.textContent = "⏸️ Pausar pista";
+        mensajeFinal.style.display = "none";
+      } else {
+        audioPista.pause();
+        botonPlay.textContent = "▶️ Reproducir pista";
+      }
+    });
+
+    // Cuando la pista acaba, ocultar botón play y mostrar mensaje final
+    audioPista.addEventListener("ended", () => {
+      botonPlay.style.display = "none";
+      mensajeFinal.style.display = "block";
+    });
   </script>
+
 </body>
 </html>
