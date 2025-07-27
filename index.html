@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juegos de Terror</title>
+    <link rel="stylesheet" href="/terror-juego/css/styles.css">
+    <style>
+        .info {
+            margin-top: 30px;
+            font-size: 1.2em;
+            color: #ff4444;
+        }
+
+        .glow {
+            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px crimson;
+        }
+
+        audio {
+            display: none; /* ocultar el reproductor */
+        }
+    </style>
+</head>
+<body>
+    <h1 class="glow">Bienvenido a mi web de juegos de terror</h1>
+    <p class="info">🕰️ Hora: 20:30</p>
+    <p class="info">📍 Lugar: Calle Eucaliptus, número 49</p>
+    <p>Haz clic en un jugador para comenzar...</p>
+
+    <ul>
+        <li><a href="jugador1.html">Jugador 1</a></li>
+        <li><a href="jugador2.html">Jugador 2</a></li>
+        <!-- Agrega más enlaces si quieres -->
+    </ul>
+
+    <!-- 🔊 Sonido de ambiente (terrorífico) -->
+    <audio autoplay loop>
+        <source src="https://www.fesliyanstudios.com/play-mp3/387" type="audio/mpeg">
+        Tu navegador no soporta el audio.
+    </audio>
+</body>
+</html>

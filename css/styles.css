@@ -1,0 +1,57 @@
+body {
+  background-color: #000;
+  color: #e0e0e0;
+  font-family: 'Georgia', serif;
+  text-align: center;
+  padding: 50px;
+  background-image: url('https://i.imgur.com/8kzDgRU.jpeg'); /* fondo terrorífico */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: parpadeo 10s infinite;
+}
+
+@keyframes parpadeo {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.97; }
+}
+
+.carta {
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border: 2px solid crimson;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+  box-shadow: 0 0 20px crimson;
+}
+
+.frase {
+  font-style: italic;
+  font-size: 1.5em;
+  margin-top: 30px;
+}
+
+.firma {
+  margin-top: 40px;
+  color: #999;
+  font-size: 0.9em;
+}
+
+/* 🩸 Glow para títulos */
+.glow {
+  color: #ff4444;
+  text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px crimson;
+}
+
+/* 📍 Estilo para hora/lugar */
+.info {
+  margin-top: 30px;
+  font-size: 1.2em;
+  color: #ff4444;
+}
+
+/* 🔊 Oculta el reproductor de audio */
+audio {
+  display: none;
+}
