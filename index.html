@@ -16,7 +16,27 @@
         }
 
         audio {
-            display: none; /* ocultar el reproductor */
+            display: none; /* Ocultar el reproductor */
+        }
+
+        .boton-inicio {
+            background-color: crimson;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 30px auto;
+            box-shadow: 0 0 10px crimson;
+        }
+
+        .boton-inicio:hover {
+            background-color: darkred;
+        }
+
+        .oculto {
+            display: none;
         }
     </style>
 </head>
@@ -24,18 +44,34 @@
     <h1 class="glow">Bienvenido a mi web de juegos de terror</h1>
     <p class="info">🕰️ Hora: 20:30</p>
     <p class="info">📍 Lugar: Calle Eucaliptus, número 49</p>
-    <p>Haz clic en un jugador para comenzar...</p>
+    <p><strong>Presiona el botón para comenzar...</strong></p>
 
-    <ul>
-        <li><a href="jugador1.html">Jugador 1</a></li>
-        <li><a href="jugador2.html">Jugador 2</a></li>
-        <!-- Agrega más enlaces si quieres -->
-    </ul>
+    <button class="boton-inicio" onclick="iniciarExperiencia()">Iniciar experiencia</button>
+
+    <div id="contenido" class="oculto">
+        <p>Haz clic en un jugador para comenzar...</p>
+        <ul>
+            <li><a href="jugador1.html">Jugador 1</a></li>
+            <li><a href="jugador2.html">Jugador 2</a></li>
+            <!-- Agrega más enlaces si quieres -->
+        </ul>
+    </div>
 
     <!-- 🔊 Sonido de ambiente (suspenso) -->
-    <audio autoplay loop volume="0.4">
+    <audio id="terror-audio" loop>
         <source src="https://www.fesliyanstudios.com/play-mp3/358" type="audio/mpeg">
         Tu navegador no soporta el audio.
     </audio>
+
+    <script>
+        function iniciarExperiencia() {
+            const audio = document.getElementById("terror-audio");
+            const contenido = document.getElementById("contenido");
+            audio.play().catch(err => {
+                console.log("Autoplay bloqueado:", err);
+            });
+            contenido.classList.remove("oculto");
+        }
+    </script>
 </body>
 </html>
