@@ -32,9 +32,9 @@
       font-size: 1.8em;
       border-radius: 12px;
       cursor: pointer;
-      box-shadow: 0 0 15px crimson;
       margin: 10px;
       transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson; /* glow rojo para botones normales */
     }
 
     button:hover {
@@ -48,11 +48,16 @@
       padding: 15px 30px;
     }
 
-    #botonPlay, #botonRepetir, #botonContinuar {
+    /* Botones de reproducir sin glow */
+    #botonPlay, #botonRepetir {
       display: none;
       font-size: 2em;
       padding: 10px 20px;
-      user-select: none;
+      box-shadow: none; /* quitar glow rojo */
+    }
+
+    #botonPlay:hover, #botonRepetir:hover {
+      background-color: darkred;
     }
 
     #contenedorFinal {
