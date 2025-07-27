@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Juegos de Terror</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
@@ -42,8 +42,14 @@
 
   <button id="botonTerror">NO LO HAGAS</button>
 
+  <audio id="audioAmbiente" loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
   <script>
     const boton = document.getElementById("botonTerror");
+    const audio = document.getElementById("audioAmbiente");
     let etapa = 0;
 
     // Mostrar botón en primera interacción (clic/tap)
@@ -54,18 +60,18 @@
       }
     }, { once: true });
 
-    // Cambiar texto del botón en cada clic
+    // Cambiar texto y reproducir audio al pulsar botón
     boton.addEventListener("click", () => {
       if (etapa === 1) {
         boton.textContent = "TE VAS A ARREPENTIR";
         etapa = 2;
+        audio.volume = 0.4;
+        audio.play().catch(e => console.log("Error al reproducir audio:", e));
       } else if (etapa === 2) {
         boton.textContent = "PARA";
         etapa = 3;
       } else {
-        // Opcional: hacer algo al final
-        // Por ejemplo, redirigir o mostrar susto
-        // window.location.href = "siguiente.html";
+        // Aquí puedes agregar acción al tercer clic si quieres
       }
     });
   </script>
