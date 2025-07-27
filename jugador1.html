@@ -1,15 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Mensaje para Ti</title>
-  <link rel="stylesheet" href="/terror-juego/css/styles.css">
+  <meta charset="UTF-8" />
+  <title>Juegos de Terror</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    button {
+      display: none;
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.4em;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px crimson;
+      z-index: 10;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
 </head>
 <body>
-  <div class="carta">
-    <h1>Bienvenido</h1>
-    <p class="frase">"Tus pasos resuenan en la noche, pero el silencio responde."</p>
-    <p class="firma">— No estás solo.</p>
-  </div>
+
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <audio id="audioAmbiente" loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const boton = document.getElementById("botonTerror");
+    const audio = document.getElementById("audioAmbiente");
+    let etapa = 0;
+
+    // Mostrar botón en primera interacción (clic/tap)
+    document.addEventListener("click", () => {
+      if (etapa === 0) {
+        boton.style.display = "block";
+        etapa = 1;
+      }
+    }, { once: true });
+
+    // Cambiar texto y reproducir audio al pulsar botón
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+        audio.volume = 0.4;
+        audio.play().catch(e => console.log("Error al reproducir audio:", e));
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+      } else {
+        // Aquí puedes agregar acción al tercer clic si quieres
+      }
+    });
+  </script>
 </body>
 </html>
