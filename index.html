@@ -1,108 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Juegos de Terror</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- importante para móviles -->
-    <link rel="stylesheet" href="/terror-juego/css/styles.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            color: #e0e0e0;
-            font-family: 'Georgia', serif;
-            text-align: center;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 30px 20px;
-        }
+  <meta charset="UTF-8">
+  <title>Juegos de Terror</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-        h1.glow {
-            font-size: 1.8em;
-            text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 20px crimson;
-            margin-bottom: 30px;
-        }
+    button {
+      display: none;
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.4em;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 0 15px crimson;
+      z-index: 10;
+    }
 
-        .boton-inicio {
-            background-color: crimson;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: 10px;
-            cursor: pointer;
-            margin: 20px auto;
-            box-shadow: 0 0 10px crimson;
-        }
-
-        .boton-inicio:hover {
-            background-color: darkred;
-        }
-
-        .oculto {
-            display: none;
-        }
-
-        .info {
-            font-size: 1em;
-            color: #ff4444;
-            margin: 10px 0;
-        }
-
-        ul {
-            padding: 0;
-            list-style: none;
-        }
-
-        li a {
-            color: crimson;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin: 10px 0;
-            font-size: 1.1em;
-        }
-
-        audio {
-            display: none;
-        }
-    </style>
+    button:hover {
+      background-color: darkred;
+    }
+  </style>
 </head>
 <body>
-    <h1 class="glow">No presiones el botón.</h1>
 
-    <button class="boton-inicio" onclick="iniciarExperiencia()">Continuar</button>
+  <button id="botonTerror">NO LO HAGAS</button>
 
-    <div id="contenido" class="oculto">
-        <p class="info">🕰️ Hora: 20:30</p>
-        <p class="info">📍 Lugar: Calle Eucaliptus, número 49</p>
-        <p>Haz clic en un jugador para comenzar...</p>
-        <ul>
-            <li><a href="jugador1.html">Jugador 1</a></li>
-            <li><a href="jugador2.html">Jugador 2</a></li>
-        </ul>
-    </div>
+  <script>
+    const boton = document.getElementById("botonTerror");
+    let etapa = 0;
 
-    <!-- 🔊 Sonido de ambiente (local) -->
-    <audio id="terror-audio" loop>
-        <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg">
-        Tu navegador no soporta el audio.
-    </audio>
+    // Mostrar botón en primera interacción (clic/tap)
+    document.addEventListener("click", () => {
+      if (etapa === 0) {
+        boton.style.display = "block";
+        etapa = 1;
+      }
+    }, { once: true });
 
-    <script>
-        function iniciarExperiencia() {
-            const audio = document.getElementById("terror-audio");
-            audio.volume = 0.4;
-            audio.play().catch(err => console.log("Error al reproducir audio:", err));
-            document.getElementById("contenido").classList.remove("oculto");
-        }
-    </script>
+    // Cambiar texto del botón en cada clic
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+      } else if (etapa === 2) {
+        boton.textContent = "PARA";
+        etapa = 3;
+      } else {
+        // Opcional: hacer algo al final
+        // Por ejemplo, redirigir o mostrar susto
+        // window.location.href = "siguiente.html";
+      }
+    });
+  </script>
 </body>
 </html>
