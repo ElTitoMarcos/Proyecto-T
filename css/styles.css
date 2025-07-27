@@ -40,12 +40,11 @@ body {
 
 /* 🩸 Glow para títulos */
 h1.glow {
-    font-size: 1.8em;
-    text-shadow: 1px 1px 2px #000, 0 0 5px crimson;
-    color: #ffe6e6;
-    margin-bottom: 30px;
+  font-size: 1.8em;
+  text-shadow: 1px 1px 2px #000, 0 0 5px crimson;
+  color: #ffe6e6;
+  margin-bottom: 30px;
 }
-
 
 /* 📍 Estilo para hora/lugar */
 .info {
@@ -57,4 +56,23 @@ h1.glow {
 /* 🔊 Oculta el reproductor de audio */
 audio {
   display: none;
+}
+
+/* Estilos limpios sin glow para botones de audio */
+#botonPlay, #botonRepetir {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  text-shadow: none !important;
+  background-color: crimson;
+  color: white;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 2em;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+}
+
+#botonPlay:hover, #botonRepetir:hover {
+  background-color: darkred;
 }
