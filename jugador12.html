@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Juegos de Terror - Jugador 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.8em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #botonTerror {
+      display: none;
+      z-index: 10;
+      font-size: 1.4em;
+      padding: 15px 30px;
+    }
+
+    .letraFinal {
+      font-size: 8em;
+      font-weight: bold;
+      color: crimson;
+      text-shadow: 0 0 10px crimson;
+      margin-top: 40px;
+    }
+
+    .romano {
+      font-size: 0.4em;
+      vertical-align: top;
+      margin-left: 5px;
+    }
+
+    #botonContinuar {
+      display: none;
+      font-size: 1.2em;
+      padding: 12px 25px;
+      margin-top: 20px;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <div id="letraPista" class="letraFinal" style="display: none;"></div>
+
+  <button id="botonContinuar">Continuar</button>
+
+  <audio id="audioAmbiente" loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const boton = document.getElementById("botonTerror");
+    const letraPista = document.getElementById("letraPista");
+    const botonContinuar = document.getElementById("botonContinuar");
+    const audioAmbiente = document.getElementById("audioAmbiente");
+
+    // Letra cifrada + número romano para este jugador
+    const letra = "W";        // ← Cambia según el jugador
+    const numeroRomano = "XI"; // ← Cambia según el orden
+
+    let etapa = 0;
+
+    // Mostrar botón al primer clic
+    document.addEventListener("click", () => {
+      if (etapa === 0) {
+        boton.style.display = "inline-block";
+        etapa = 1;
+      }
+    }, { once: true });
+
+    // Secuencia de frases
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+        audioAmbiente.volume = 0.4;
+        audioAmbiente.play().catch(err => console.warn("No se pudo reproducir el audio:", err));
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+      } else if (etapa === 3) {
+        boton.style.display = "none";
+        letraPista.style.display = "block";
+        letraPista.innerHTML = `${letra}<span class="romano">${numeroRomano}</span>`;
+        botonContinuar.style.display = "inline-block";
+      }
+    });
+
+    // Ir a index al pulsar continuar
+    botonContinuar.addEventListener("click", () => {
+      window.location.href = "/terror-juego/index.html";
+    });
+  </script>
+
+</body>
+</html>

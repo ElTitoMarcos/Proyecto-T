@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pista - Jugador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.8em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #pista {
+      display: none;
+      font-size: 3em;
+      color: crimson;
+      text-shadow: 0 0 10px crimson, 0 0 20px crimson;
+      margin-top: 40px;
+    }
+
+    #botonContinuar {
+      display: none;
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 0 15px crimson;
+      transition: background-color 0.3s;
+    }
+
+    #botonContinuar:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <div id="pista">César +8</div>
+  <button id="botonContinuar">Continuar</button>
+
+  <audio id="audioAmbiente" autoplay loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const boton = document.getElementById("botonTerror");
+    const pista = document.getElementById("pista");
+    const botonContinuar = document.getElementById("botonContinuar");
+    const audioAmbiente = document.getElementById("audioAmbiente");
+
+    let etapa = 0;
+
+    // Mostrar botón al hacer clic en cualquier lugar si aún no se ha activado
+    document.addEventListener("click", () => {
+      if (etapa === 0) {
+        boton.style.display = "inline-block";
+        etapa = 1;
+      }
+    }, { once: true });
+
+    // Secuencia de clics en el botón principal
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+        audioAmbiente.volume = 0.4;
+        audioAmbiente.play().catch(e => console.log("Error al reproducir ambientación:", e));
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+      } else if (etapa === 3) {
+        boton.style.display = "none";
+        pista.style.display = "block";
+        botonContinuar.style.display = "inline-block";
+      }
+    });
+
+    // Redirigir al index al continuar
+    botonContinuar.addEventListener("click", () => {
+      window.location.href = "/terror-juego/index.html";
+    });
+  </script>
+
+</body>
+</html>
