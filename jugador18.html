@@ -24,6 +24,25 @@
       user-select: none;
     }
 
+    input[type="number"] {
+      font-size: 2em;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      text-align: center;
+      width: 80vw;
+      max-width: 300px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    #mensajeError {
+      color: #ff5555;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+
     button {
       background-color: crimson;
       color: white;
@@ -34,7 +53,7 @@
       cursor: pointer;
       margin: 10px;
       transition: background-color 0.3s;
-      box-shadow: 0 0 15px crimson; /* glow rojo para botones normales */
+      box-shadow: 0 0 15px crimson;
     }
 
     button:hover {
@@ -46,17 +65,16 @@
       z-index: 10;
       font-size: 1.4em;
       padding: 15px 30px;
-      box-shadow: 0 0 15px crimson; /* Mantener glow para este botón */
+      box-shadow: 0 0 15px crimson;
     }
 
-    /* Botones de reproducir sin glow ni box-shadow ni outline */
     #botonPlay, #botonRepetir {
       display: none;
       font-size: 2em;
       padding: 10px 20px;
-      box-shadow: none !important; /* quitar cualquier sombra */
-      outline: none !important; /* quitar borde al focus */
-      text-shadow: none !important; /* quitar sombra texto */
+      box-shadow: none !important;
+      outline: none !important;
+      text-shadow: none !important;
       background-color: crimson;
       border: none;
       color: white;
@@ -67,9 +85,6 @@
 
     #botonPlay:hover, #botonRepetir:hover {
       background-color: darkred;
-      box-shadow: none !important;
-      outline: none !important;
-      text-shadow: none !important;
     }
 
     #contenedorFinal {
@@ -80,6 +95,15 @@
 </head>
 <body>
 
+  <!-- Verificación del número -->
+  <div id="verificacionInicial">
+    <input type="number" id="inputCodigo" placeholder="MALA IDEA" />
+    <br />
+    <button id="btnVerificar">Validar</button>
+    <p id="mensajeError">Código incorrecto. Intenta otra vez.</p>
+  </div>
+
+  <!-- Botones de juego -->
   <button id="botonTerror">NO LO HAGAS</button>
   <button id="botonPlay">▶️</button>
 
@@ -88,6 +112,7 @@
     <button id="botonContinuar">Continuar</button>
   </div>
 
+  <!-- Audio -->
   <audio id="audioAmbiente" loop>
     <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
@@ -99,6 +124,13 @@
   </audio>
 
   <script>
+    const numeroSecreto = 1357; // ← Cambia el número para este jugador
+
+    const inputCodigo = document.getElementById("inputCodigo");
+    const btnVerificar = document.getElementById("btnVerificar");
+    const mensajeError = document.getElementById("mensajeError");
+    const verificacionInicial = document.getElementById("verificacionInicial");
+
     const boton = document.getElementById("botonTerror");
     const botonPlay = document.getElementById("botonPlay");
     const botonRepetir = document.getElementById("botonRepetir");
@@ -110,15 +142,19 @@
 
     let etapa = 0;
 
-    // Mostrar botón en primera interacción (clic/tap)
-    document.addEventListener("click", () => {
-      if (etapa === 0) {
+    // Verificación inicial
+    btnVerificar.addEventListener("click", () => {
+      const valor = parseInt(inputCodigo.value, 10);
+      if (valor === numeroSecreto) {
+        verificacionInicial.style.display = "none";
         boton.style.display = "inline-block";
         etapa = 1;
+      } else {
+        mensajeError.style.display = "block";
       }
-    }, { once: true });
+    });
 
-    // Cambiar texto y reproducir audio al pulsar botón
+    // Secuencia de botones
     boton.addEventListener("click", () => {
       if (etapa === 1) {
         boton.textContent = "TE VAS A ARREPENTIR";
@@ -136,7 +172,6 @@
       }
     });
 
-    // Control botón play para pista-1
     botonPlay.addEventListener("click", () => {
       if (audioPista.paused) {
         audioPista.play();
@@ -147,28 +182,23 @@
       }
     });
 
-    // Cuando la pista acaba, ocultar botón play y mostrar opciones repetir y continuar
     audioPista.addEventListener("ended", () => {
       botonPlay.style.display = "none";
       contenedorFinal.style.display = "block";
-      // Mostrar ambos botones: repetir y continuar
       botonRepetir.style.display = "inline-block";
       botonContinuar.style.display = "inline-block";
     });
 
-    // Repetir pista
     botonRepetir.addEventListener("click", () => {
       audioPista.currentTime = 0;
       audioPista.play();
       botonPlay.textContent = "⏸️";
       contenedorFinal.style.display = "none";
       botonPlay.style.display = "inline-block";
-      // Ocultar los botones de repetir y continuar mientras suena
       botonRepetir.style.display = "none";
       botonContinuar.style.display = "none";
     });
 
-    // Continuar (redirigir a index)
     botonContinuar.addEventListener("click", () => {
       window.location.href = "/terror-juego/index.html";
     });
