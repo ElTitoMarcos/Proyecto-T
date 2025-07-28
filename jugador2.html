@@ -24,6 +24,18 @@
       user-select: none;
     }
 
+    input[type="number"] {
+      font-size: 2em;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      text-align: center;
+      width: 80vw;
+      max-width: 300px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
     button {
       background-color: crimson;
       color: white;
@@ -69,6 +81,12 @@
       margin-top: 20px;
     }
 
+    #mensajeError {
+      color: #ff5555;
+      font-weight: bold;
+      display: none;
+    }
+
     audio {
       display: none;
     }
@@ -76,18 +94,37 @@
 </head>
 <body>
 
+  <!-- Verificación del número secreto -->
+  <div id="validacionNumero">
+    <input type="number" id="inputNumero" placeholder="MALA IDEA" />
+    <br />
+    <button id="btnValidar">Validar</button>
+    <p id="mensajeError">Código incorrecto. Intenta otra vez.</p>
+  </div>
+
+  <!-- Botón principal de terror -->
   <button id="botonTerror">NO LO HAGAS</button>
 
+  <!-- Letra cifrada + número romano -->
   <div id="letraPista" class="letraFinal" style="display: none;"></div>
 
+  <!-- Botón para continuar -->
   <button id="botonContinuar">Continuar</button>
 
+  <!-- Audio -->
   <audio id="audioAmbiente" loop>
     <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
   </audio>
 
   <script>
+    const numeroSecreto = 1234; // Cambia este número según el jugador
+
+    const validacionNumero = document.getElementById("validacionNumero");
+    const inputNumero = document.getElementById("inputNumero");
+    const btnValidar = document.getElementById("btnValidar");
+    const mensajeError = document.getElementById("mensajeError");
+
     const boton = document.getElementById("botonTerror");
     const letraPista = document.getElementById("letraPista");
     const botonContinuar = document.getElementById("botonContinuar");
