@@ -28,23 +28,6 @@
       margin: 10px 0;
       text-shadow: 0 0 10px darkred;
     }
-
-    #btnPlayAudio {
-      display: none;
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 1.5em;
-      background-color: crimson;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      box-shadow: 0 0 15px crimson;
-    }
-
-    #btnPlayAudio:hover {
-      background-color: darkred;
-    }
   </style>
 </head>
 <body>
@@ -53,8 +36,6 @@
   <p class="info">🕰️ Hora: 19:30</p>
   <p class="info">📍 Lugar: Eucaliptus 49, Sant Boi</p>
 
-  <button id="btnPlayAudio">Reproducir audio</button>
-
   <audio id="audioIndex" loop>
     <source src="/terror-juego/audio/audio-index.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
@@ -62,24 +43,12 @@
 
   <script>
     const audio = document.getElementById("audioIndex");
-    const btnPlay = document.getElementById("btnPlayAudio");
 
-    audio.volume = 0.4;
-
-    // Intentamos reproducir el audio al cargar la página
-    window.addEventListener("load", () => {
-      audio.play().catch(() => {
-        // Si falla (bloqueo navegador), mostramos botón para reproducir
-        btnPlay.style.display = "inline-block";
-      });
-    });
-
-    // Al pulsar el botón, reproducir audio
-    btnPlay.addEventListener("click", () => {
-      audio.play().then(() => {
-        btnPlay.style.display = "none";
-      }).catch(e => console.log("Error al reproducir tras botón:", e));
-    });
+    // Esperar a la interacción del usuario para reproducir
+    document.addEventListener("click", () => {
+      audio.volume = 0.4;
+      audio.play().catch(e => console.log("Error al reproducir audio:", e));
+    }, { once: true });
   </script>
 
 </body>
