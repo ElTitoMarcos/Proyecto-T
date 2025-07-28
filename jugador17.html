@@ -41,8 +41,11 @@
       background-color: darkred;
     }
 
-    #pista {
+    #botonTerror, #pista, #botonContinuar {
       display: none;
+    }
+
+    #pista {
       font-size: 3em;
       color: crimson;
       text-shadow: 0 0 10px crimson, 0 0 20px crimson;
@@ -50,7 +53,6 @@
     }
 
     #botonContinuar {
-      display: none;
       background-color: crimson;
       color: white;
       border: none;
@@ -75,7 +77,7 @@
   <div id="pista">César +8</div>
   <button id="botonContinuar">Continuar</button>
 
-  <audio id="audioAmbiente" autoplay loop>
+  <audio id="audioAmbiente" loop>
     <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
     Tu navegador no soporta el audio.
   </audio>
@@ -88,7 +90,9 @@
 
     let etapa = 0;
 
-    // Mostrar botón al hacer clic en cualquier lugar si aún no se ha activado
+    // Ocultar todo al principio (ya está hecho con CSS)
+
+    // Mostrar botón al hacer clic/tap inicial
     document.addEventListener("click", () => {
       if (etapa === 0) {
         boton.style.display = "inline-block";
@@ -96,7 +100,7 @@
       }
     }, { once: true });
 
-    // Secuencia de clics en el botón principal
+    // Secuencia del botón
     boton.addEventListener("click", () => {
       if (etapa === 1) {
         boton.textContent = "TE VAS A ARREPENTIR";
@@ -113,7 +117,7 @@
       }
     });
 
-    // Redirigir al index al continuar
+    // Redirigir
     botonContinuar.addEventListener("click", () => {
       window.location.href = "/terror-juego/index.html";
     });
