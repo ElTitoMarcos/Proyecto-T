@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Juegos de Terror - Jugador 1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.8em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #botonTerror {
+      display: none;
+      z-index: 10;
+      font-size: 1.4em;
+      padding: 15px 30px;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    #letraPista {
+      font-size: 10em;
+      font-weight: bold;
+      position: relative;
+      user-select: none;
+      margin-top: 40px;
+      height: 1.2em;
+      line-height: 1.2em;
+    }
+
+    #numeroRomano {
+      position: absolute;
+      top: 0.1em;
+      right: -0.6em;
+      font-size: 0.4em;
+      color: crimson;
+      text-shadow:
+        1px 1px 0 #700,
+        -1px -1px 0 #700,
+        1px -1px 0 #700,
+        -1px 1px 0 #700;
+      font-family: 'Times New Roman', serif;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <div id="letraPista"></div>
+
+  <script>
+    const boton = document.getElementById("botonTerror");
+    const letraPista = document.getElementById("letraPista");
+
+    // Datos para este jugador (ejemplo jugador 1)
+    // Cambia aquí la letra cifrada y el número romano según cada jugador
+    const letra = "B";        // Letra cifrada (mayúscula)
+    const numeroRomano = "I"; // Número romano de la posición
+
+    let etapa = 0;
+
+    document.addEventListener("click", () => {
+      if (etapa === 0) {
+        boton.style.display = "inline-block";
+        etapa = 1;
+      }
+    }, { once: true });
+
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+
+        // Mostrar la letra + número romano sangriento
+        letraPista.innerHTML = letra + `<span id="numeroRomano">${numeroRomano}</span>`;
+
+        // Ocultar el botón para que solo quede la pista visible
+        boton.style.display = "none";
+      }
+    });
+  </script>
+
+</body>
+</html>
