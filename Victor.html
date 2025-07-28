@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Víctor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
+    }
+
+    input[type="number"] {
+      font-size: 2em;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      text-align: center;
+      width: 80vw;
+      max-width: 300px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.8em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #botonTerror {
+      display: none;
+      z-index: 10;
+      font-size: 1.4em;
+      padding: 15px 30px;
+    }
+
+    .letraFinal {
+      font-size: 8em;
+      font-weight: bold;
+      color: crimson;
+      text-shadow: 0 0 10px crimson;
+      margin-top: 40px;
+    }
+
+    .romano {
+      font-size: 0.4em;
+      vertical-align: top;
+      margin-left: 5px;
+    }
+
+    #botonContinuar {
+      display: none;
+      font-size: 1.2em;
+      padding: 12px 25px;
+      margin-top: 20px;
+    }
+
+    #mensajeError {
+      color: #ff5555;
+      font-weight: bold;
+      display: none;
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Verificación del número secreto -->
+  <div id="validacionNumero">
+    <input type="number" id="inputNumero" placeholder="MALA IDEA" />
+    <br />
+    <button id="btnValidar">Validar</button>
+    <p id="mensajeError">Código incorrecto. Intenta otra vez.</p>
+  </div>
+
+  <!-- Botón principal de terror -->
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <!-- Letra cifrada + número romano -->
+  <div id="letraPista" class="letraFinal" style="display: none;"></div>
+
+  <!-- Botón para continuar -->
+  <button id="botonContinuar">Continuar</button>
+
+  <!-- Audio -->
+  <audio id="audioAmbiente" loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const numeroSecreto = 1234; // Cambia este número según el jugador
+
+    const validacionNumero = document.getElementById("validacionNumero");
+    const inputNumero = document.getElementById("inputNumero");
+    const btnValidar = document.getElementById("btnValidar");
+    const mensajeError = document.getElementById("mensajeError");
+
+    const boton = document.getElementById("botonTerror");
+    const letraPista = document.getElementById("letraPista");
+    const botonContinuar = document.getElementById("botonContinuar");
+    const audioAmbiente = document.getElementById("audioAmbiente");
+
+    const letra = "V";        // ← Cambiar según la letra cifrada
+    const numeroRomano = "XIII"; // ← Cambiar según el orden
+
+    let etapa = 0;
+
+    // Validar número antes de permitir avanzar
+    btnValidar.addEventListener("click", () => {
+      const valor = parseInt(inputNumero.value, 10);
+
+      if (valor === numeroSecreto) {
+        validacionNumero.style.display = "none";
+        boton.style.display = "inline-block";
+        etapa = 1;
+      } else {
+        mensajeError.style.display = "block";
+      }
+    });
+
+    // Secuencia del botón
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+        audioAmbiente.volume = 0.4;
+        audioAmbiente.play().catch(err => console.warn("No se pudo reproducir el audio:", err));
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+      } else if (etapa === 3) {
+        boton.style.display = "none";
+        letraPista.style.display = "block";
+        letraPista.innerHTML = `${letra}<span class="romano">${numeroRomano}</span>`;
+        botonContinuar.style.display = "inline-block";
+      }
+    });
+
+    // Redirige al index
+    botonContinuar.addEventListener("click", () => {
+      window.location.href = "/terror-juego/index.html";
+    });
+  </script>
+
+</body>
+</html>

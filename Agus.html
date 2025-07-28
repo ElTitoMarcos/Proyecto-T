@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      background-image: url('https://i.pinimg.com/736x/d6/b1/ad/d6b1ad1d1593a8a20560a44169e47f5f.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #e0e0e0;
+      text-align: center;
+      user-select: none;
+    }
+
+    input[type="number"] {
+      font-size: 2em;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      text-align: center;
+      width: 80vw;
+      max-width: 300px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+    }
+
+    #mensajeError {
+      color: #ff5555;
+      font-weight: bold;
+      display: none;
+      margin-top: 10px;
+    }
+
+    button {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.8em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s;
+      box-shadow: 0 0 15px crimson;
+    }
+
+    button:hover {
+      background-color: darkred;
+    }
+
+    #botonTerror, #pista, #botonContinuar {
+      display: none;
+    }
+
+    #pista {
+      font-size: 3em;
+      color: crimson;
+      text-shadow: 0 0 10px crimson, 0 0 20px crimson;
+      margin-top: 40px;
+    }
+
+    #botonContinuar {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.5em;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 0 15px crimson;
+      transition: background-color 0.3s;
+    }
+
+    #botonContinuar:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Verificación del número -->
+  <div id="verificacionInicial">
+    <input type="number" id="inputCodigo" placeholder="MALA IDEA" />
+    <br />
+    <button id="btnVerificar">Validar</button>
+    <p id="mensajeError">Código incorrecto. Intenta otra vez.</p>
+  </div>
+
+  <!-- Botón de terror -->
+  <button id="botonTerror">NO LO HAGAS</button>
+
+  <!-- Pista y continuación -->
+  <div id="pista">César +8</div>
+  <button id="botonContinuar">Continuar</button>
+
+  <!-- Audio -->
+  <audio id="audioAmbiente" loop>
+    <source src="/terror-juego/audio/ambientacion.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const numeroSecreto = 1234; // Cambia este número para este jugador
+
+    const inputCodigo = document.getElementById("inputCodigo");
+    const btnVerificar = document.getElementById("btnVerificar");
+    const mensajeError = document.getElementById("mensajeError");
+    const verificacionInicial = document.getElementById("verificacionInicial");
+
+    const boton = document.getElementById("botonTerror");
+    const pista = document.getElementById("pista");
+    const botonContinuar = document.getElementById("botonContinuar");
+    const audioAmbiente = document.getElementById("audioAmbiente");
+
+    let etapa = 0;
+
+    // Validación del número secreto
+    btnVerificar.addEventListener("click", () => {
+      const valor = parseInt(inputCodigo.value, 10);
+      if (valor === numeroSecreto) {
+        verificacionInicial.style.display = "none";
+        boton.style.display = "inline-block";
+        etapa = 1;
+      } else {
+        mensajeError.style.display = "block";
+      }
+    });
+
+    // Secuencia del botón
+    boton.addEventListener("click", () => {
+      if (etapa === 1) {
+        boton.textContent = "TE VAS A ARREPENTIR";
+        etapa = 2;
+        audioAmbiente.volume = 0.4;
+        audioAmbiente.play().catch(e => console.log("Error al reproducir ambientación:", e));
+      } else if (etapa === 2) {
+        boton.textContent = "AHORA YA ES TARDE";
+        etapa = 3;
+      } else if (etapa === 3) {
+        boton.style.display = "none";
+        pista.style.display = "block";
+        botonContinuar.style.display = "inline-block";
+      }
+    });
+
+    // Redirigir al index
+    botonContinuar.addEventListener("click", () => {
+      window.location.href = "/terror-juego/index.html";
+    });
+  </script>
+
+</body>
+</html>
