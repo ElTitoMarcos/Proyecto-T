@@ -30,8 +30,17 @@
       border-radius: 8px;
       border: none;
       text-align: center;
-      width: 150px;
+      width: 80vw;
+      max-width: 300px;
+      box-sizing: border-box;
       margin-bottom: 20px;
+    }
+
+    @media (max-width: 400px) {
+      input[type="number"] {
+        font-size: 1.5em;
+        width: 90vw;
+      }
     }
 
     button {
