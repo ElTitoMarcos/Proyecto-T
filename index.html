@@ -31,8 +31,25 @@
   </style>
 </head>
 <body>
+
   <p class="info">📅 Día: 30 Agosto</p>
   <p class="info">🕰️ Hora: 19:30</p>
   <p class="info">📍 Lugar: Eucaliptus 49, Sant Boi</p>
+
+  <audio id="audioIndex" loop>
+    <source src="/terror-juego/audio/audio-index.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio.
+  </audio>
+
+  <script>
+    const audio = document.getElementById("audioIndex");
+
+    // Esperar a la interacción del usuario para reproducir
+    document.addEventListener("click", () => {
+      audio.volume = 0.4;
+      audio.play().catch(e => console.log("Error al reproducir audio:", e));
+    }, { once: true });
+  </script>
+
 </body>
 </html>
