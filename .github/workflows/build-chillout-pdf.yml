@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "*/5 * * * *"
+  pull_request_target:
+    types: [opened, synchronize, reopened]
   push:
     paths:
       - "guia-chillout/build_pdf.py"
@@ -17,8 +19,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main
         uses: actions/checkout@v4
+        with:
+          ref: main
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -37,5 +41,5 @@ jobs:
             echo "PDF unchanged"
           else
             git commit -m "Publicar PDF completo del Chillout [skip ci]"
-            git push
+            git push origin HEAD:main
           fi
