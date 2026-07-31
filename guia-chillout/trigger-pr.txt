@@ -1,1 +1,1 @@
-Trigger the PDF publishing workflow - second attempt.
+Trigger the corrected PDF publishing workflow.
