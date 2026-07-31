@@ -1,0 +1,1 @@
+Rebuild the finalized Chillout PDF after the workflow was added.
