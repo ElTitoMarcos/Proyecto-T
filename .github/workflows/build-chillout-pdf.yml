@@ -1,0 +1,39 @@
+name: Build Chillout PDF
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "guia-chillout/build_pdf.py"
+      - "guia-chillout/v6/**"
+      - ".github/workflows/build-chillout-pdf.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install reportlab pillow
+      - name: Build PDF
+        run: python guia-chillout/build_pdf.py
+      - name: Commit generated PDF
+        run: |
+          rm -rf guia-chillout/_build_images
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add guia-chillout/Guia_Chillout_COMPLETA_FINAL.pdf
+          if git diff --cached --quiet; then
+            echo "PDF unchanged"
+          else
+            git commit -m "Publicar PDF completo del Chillout [skip ci]"
+            git push
+          fi
