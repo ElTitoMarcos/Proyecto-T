@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173b74">
+  <title>Guía rápida del Chillout</title>
+  <style>
+    :root{--navy:#173b74;--blue:#3f7fe8;--light:#f2f6fd;--line:#c8d8f3;--text:#1d2638;--muted:#667085;--orange:#f27b21;--green:#27a85f;--red:#dd4938}
+    *{box-sizing:border-box}
+    body{margin:0;background:#eef3fb;color:var(--text);font-family:Arial,Helvetica,sans-serif;line-height:1.45}
+    main{max-width:920px;margin:auto;padding:18px}
+    header{background:linear-gradient(135deg,#173b74,#28589e);color:#fff;border-radius:22px;padding:26px;margin-bottom:18px}
+    h1{font-size:clamp(28px,6vw,48px);line-height:1.05;margin:0 0 8px}
+    header p{margin:0;font-size:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;margin:16px 0;box-shadow:0 7px 18px rgba(23,59,116,.08)}
+    h2{margin:0 0 14px;color:var(--navy);font-size:27px}
+    h3{margin:18px 0 10px;color:var(--navy);font-size:22px}
+    .hero{display:grid;grid-template-columns:170px 1fr;gap:20px;align-items:center}
+    .remote{width:150px;height:360px;margin:auto;border-radius:46px;background:#151515;color:#fff;display:flex;flex-direction:column;align-items:center;padding:22px 16px;box-shadow:0 8px 18px rgba(0,0,0,.22)}
+    .mic{width:52px;height:52px;border-radius:50%;background:#1da1f2;display:flex;align-items:center;justify-content:center;font-size:25px;margin:12px 0 20px}
+    .wheel{width:102px;height:102px;border-radius:50%;border:16px solid #242424;background:#0b0b0b;margin-bottom:22px}
+    .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:100%}.keys span{height:22px;border-radius:11px;background:#333}
+    .apps{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.app{color:#fff;font-weight:700;border-radius:14px;padding:10px 15px}.youtube,.netflix{background:#df2029}.twitch{background:#7d4bd6}.prime{background:#0089a7}.disney{background:#315b9d}
+    ol.steps{padding-left:28px;margin:0}ol.steps li{padding:7px 0;font-size:19px}
+    .commands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.cmd{border:1px solid var(--line);background:#fafcff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:18px}
+    .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--blue);margin-right:8px}.orange{background:var(--orange)}.green{background:var(--green)}.red{background:var(--red)}
+    .remotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.remote-card{border:1px solid var(--line);border-radius:16px;padding:15px;background:#fff}.remote-card strong{display:block;color:var(--navy);font-size:20px;margin-bottom:5px}
+    .warning{border-left:6px solid var(--red);background:#fff5f3;padding:14px 16px;border-radius:10px}
+    .footer{color:var(--muted);font-size:14px;text-align:center;padding:18px 0 8px}
+    @media(max-width:650px){main{padding:10px}.hero{grid-template-columns:1fr}.remote{height:300px;width:125px}.wheel{width:82px;height:82px}.commands,.remotes{grid-template-columns:1fr}.card{padding:16px}h2{font-size:24px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Guía rápida del Chillout</h1>
+    <p>Usa el mando Fire TV y los comandos de voz. Se abre directamente en el navegador, sin instalar ninguna aplicación.</p>
+  </header>
+
+  <section class="card hero">
+    <div class="remote" aria-label="Representación del mando Fire TV">
+      <div class="mic">🎤</div><div class="wheel"></div><div class="keys"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div>
+      <h2>El mando principal es el Fire TV</h2>
+      <p>Para YouTube, Twitch, Netflix, Prime Video y casi todo lo demás, usa siempre el Fire Stick.</p>
+      <h3>Cómo hablar con Alexa</h3>
+      <ol class="steps"><li>Mantén pulsado el botón azul del mando Fire TV.</li><li>Di el comando.</li><li>Suelta el botón.</li></ol>
+      <div class="apps"><span class="app youtube">“Abre YouTube”</span><span class="app twitch">“Abre Twitch”</span><span class="app netflix">“Abre Netflix”</span><span class="app prime">“Abre Prime Video”</span><span class="app disney">“Abre Disney Plus”</span></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Comandos principales</h2>
+    <div class="commands">
+      <div class="cmd"><span class="dot green"></span>“Enciéndelo todo”</div><div class="cmd"><span class="dot red"></span>“Apágalo todo”</div>
+      <div class="cmd"><span class="dot"></span>“Pon el Fire Stick en el proyector”</div><div class="cmd"><span class="dot"></span>“Pon el Fire Stick en la tele”</div>
+      <div class="cmd"><span class="dot orange"></span>“Verano”</div><div class="cmd"><span class="dot"></span>“Invierno”</div>
+      <div class="cmd"><span class="dot"></span>“Apaga el aire”</div><div class="cmd"><span class="dot orange"></span>“Pon más brillo al fuego”</div>
+      <div class="cmd"><span class="dot orange"></span>“Pon menos brillo al fuego”</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Canales y otras fuentes</h2>
+    <h3>Canales en directo</h3><div class="commands"><div class="cmd">“Pon los canales en el proyector”</div><div class="cmd">“Pon los canales en la tele”</div></div>
+    <h3>Ordenador y Wii</h3><div class="commands"><div class="cmd">“Pon el PC en el proyector”</div><div class="cmd">“Pon el PC en la tele”</div><div class="cmd">“Pon la Wii en el proyector”</div><div class="cmd">“Pon la Wii en la tele”</div></div>
+  </section>
+
+  <section class="card">
+    <h2>Mandos de apoyo</h2>
+    <div class="remotes">
+      <div class="remote-card"><strong>TDT STRONG</strong>Úsalo para cambiar de canal cuando ya estén puestos los canales.</div>
+      <div class="remote-card"><strong>Barra de sonido LG</strong>Sirve para subir y bajar volumen. Si el proyector no se ve o no se oye, comprueba que esté encendida y en HDMI.</div>
+      <div class="remote-card"><strong>Proyector ViewSonic</strong>Mando de respaldo para encender y apagar. Para apagarlo, pulsa dos veces.</div>
+      <div class="remote-card"><strong>Tele interior LG</strong>Si no se ve nada, pon la fuente en HDMI. También sirve para volumen.</div>
+      <div class="remote-card"><strong>Tele exterior Sony</strong>Encender, apagar y volumen. La fuente correcta es HDMI.</div>
+      <div class="remote-card"><strong>Aire acondicionado</strong>Para cambiar la temperatura manualmente, ajústala y confirma con ON/OFF.</div>
+      <div class="remote-card"><strong>HDMI splitter 6x2</strong>Si falla la voz: la parte superior del mando corresponde al proyector y la inferior a la tele.</div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Si algo no va</h2>
+    <div class="remotes">
+      <div class="remote-card"><strong>No se ve el proyector</strong>Enciende el proyector y la barra LG. En la barra debe poner HDMI.</div>
+      <div class="remote-card"><strong>No se ve la tele</strong>Pon la tele en HDMI.</div>
+      <div class="remote-card"><strong>No sale el PC</strong>Conecta el transmisor HDMI y también su cable USB de alimentación.</div>
+      <div class="remote-card"><strong>Sigue sonando música</strong>Apaga las zonas del amplificador y baja el volumen hasta el clic.</div>
+    </div>
+    <h3>Audio por zonas</h3>
+    <p><strong>Zona 1:</strong> cristalera exterior · <strong>Zona 2:</strong> interior · <strong>Zona 3:</strong> barbacoa · <strong>Zona 4:</strong> no se usa.</p>
+    <div class="warning"><strong>Importante:</strong> “Apágalo todo” a veces puede encender algo si ya estaba apagado. Si pasa, espera un momento y apaga ese aparato individualmente.</div>
+  </section>
+
+  <p class="footer">Guía pública del sistema Chillout · alojada en GitHub</p>
+</main>
+</body>
+</html>
