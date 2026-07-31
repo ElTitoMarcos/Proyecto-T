@@ -2,6 +2,8 @@ name: Build Chillout PDF
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
   push:
     paths:
       - "guia-chillout/build_pdf.py"
