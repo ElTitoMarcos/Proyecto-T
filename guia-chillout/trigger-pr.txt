@@ -1,1 +1,1 @@
-Trigger the PDF workflow using the complete v4 images.
+Trigger the PDF workflow with corrected image padding.
