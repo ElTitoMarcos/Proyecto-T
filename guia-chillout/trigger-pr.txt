@@ -1,1 +1,1 @@
-Trigger the corrected PDF publishing workflow.
+Trigger the PDF workflow using the complete v4 images.
