@@ -11,6 +11,7 @@ on:
   push:
     paths:
       - "guia-chillout/build_pdf.py"
+      - "guia-chillout/build_pdf_fixed.py"
       - "guia-chillout/v6/**"
       - ".github/workflows/build-chillout-pdf.yml"
 
@@ -32,7 +33,7 @@ jobs:
       - name: Install dependencies
         run: pip install reportlab pillow
       - name: Build PDF
-        run: python guia-chillout/build_pdf.py
+        run: python guia-chillout/build_pdf_fixed.py
       - name: Commit generated PDF
         run: |
           rm -rf guia-chillout/_build_images
